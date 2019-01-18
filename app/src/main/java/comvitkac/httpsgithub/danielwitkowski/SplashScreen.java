@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class SplashScreen extends AppCompatActivity {
-    int stop=0;//zmienna pomocnicza do zatrzymania ekranu startowego
 
+    boolean stopScreen=false;
     @Override
-    //przeciazenie funcji uruchamianej po nacisnieciu przycisku Back
-    public void onBackPressed() { stop=1;}
+    public void onBackPressed() {
+        stopScreen=true;
+    }
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +20,17 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
 
             @Override
-            //Funkcja uruchamiajaca ekran glowny
             public void run(){
-                if (stop == 1) { }
+                if (stopScreen) {
+
+                }
                 else{
-                    Intent i = new Intent(SplashScreen.this, MainActivity.class);
-                    startActivity(i);
+                    Intent gotoLogin = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(gotoLogin);
                     finish();
                 }
             }
-            },5000);
+         },5000);
     }
 
 }

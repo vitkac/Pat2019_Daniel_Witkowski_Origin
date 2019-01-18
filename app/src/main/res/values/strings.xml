@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Daniel.Witkowski</string>
+    <string name="wyloguj">Logout</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="password_error">Password must be at least 8 characters, one digit, lower and upper case letter</string>
 </resources>
