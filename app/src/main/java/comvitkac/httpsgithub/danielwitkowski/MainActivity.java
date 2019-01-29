@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
-
+import android.widget.Toast;
 import java.util.regex.Pattern;
 
+
 public class MainActivity extends AppCompatActivity {
+    SessionManagment session;
 
     private static final Pattern PASSWORD_PATTERN=
         Pattern.compile("^+" +
@@ -33,12 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        session =new SessionManagment(getApplicationContext());
         email= findViewById(R.id.Email_box);
         password= findViewById(R.id.Password_box);
         Button login = findViewById(R.id.Login_button);
+        Toast.makeText(getApplicationContext(),"Login Status: "+session.isLoggedIn(),Toast.LENGTH_LONG).show();
 
         login.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             correctPassword=false;
         }
         if ((correctEmail)&&(correctPassword)){
+            session.createLoginSession(userEmail,SessionManagment.KEY_NAME);
             Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
             startActivity(intent);
             finish();
